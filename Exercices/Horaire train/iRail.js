@@ -1,5 +1,6 @@
-// URL 
+// Envoyer une requête de type GET à l'adresse : 
 // http://api.irail.be/liveboard/?id=BE.NMBS.008812005&lang=fr&format=json
+// Pour obtenir une réponse JSON
 
 let http = require('http');
 // Port HTTP 80, HTTPS 443
@@ -55,7 +56,9 @@ function receiveResponseCallback(response) {
 
         for (let i = 0; i < SNCB.departures.departure.length; i++) {
 
-            console.log("Heure de départ : " + new Date(parseInt(SNCB.departures.departure[i].time) * 1000) + " || Station : " + SNCB.departures.departure[i].station + " || Retard " + SNCB.departures.departure[i].delay);
+            let time = new Date(parseInt(SNCB.departures.departure[i].time) * 1000);
+
+            console.log("Heure de départ : " + time.getHours() + ":" + ('0' + time.getMinutes()).slice(-2) + " || Station : " + SNCB.departures.departure[i].station + " || Retard " + SNCB.departures.departure[i].delay + " || Annulé " + SNCB.departures.departure[i].canceled);
 
         }
 
