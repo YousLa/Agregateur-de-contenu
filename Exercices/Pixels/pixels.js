@@ -39,6 +39,7 @@ function receiveResponseCallback(response) {
         parseString(rawData, function (err, result) {
             console.log(result.rss.channel[0].item[0].title[0]);
 
+            // Ittération d'un tableau
             for (let i = 0; i < result.rss.channel[0].item.length; i++) {
                 console.log(result.rss.channel[0].item[i].title[0]);
 
