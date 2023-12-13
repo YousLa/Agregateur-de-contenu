@@ -12,7 +12,7 @@ let request = {
     // 2. Le port du protocole
     "port": 443,
     // 3. Le chemin vers la ressource
-    "path": "/cdn/13.23.1/data/en_US/champion.json"
+    "path": "/cdn/13.23.1/data/fr_FR/champion.json"
 };
 
 // A partir de l'objet https envoyer la requête vers le server qui est défini dans l'objet request
@@ -51,6 +51,9 @@ function receiveResponseCallback(response) {
         for (const [key, value] of Object.entries(championsData)) {
             console.log(`${key}: ${value}`);
         }
+
+        const NOM = document.getElementById("nom");
+        NOM.innerText()
 
         // console.log(champions);
 

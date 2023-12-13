@@ -1,0 +1,13 @@
+Global (fr): 
+https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion.json
+
+Par champion (fr): 
+https://ddragon.leagueoflegends.com/cdn/13.24.1/data/fr_FR/champion/Aatrox.json
+
+D'abord récuperé le nombre de skin dans l'objet skins et faire un for pour les afficher.
+Loading card (Aatrox_0, Aatrox_1, Aatrox_2,...):
+https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg 
+
+/!\ ATTENTION /!\
+20 requests every 1 second
+100 requests every 2 minutes
