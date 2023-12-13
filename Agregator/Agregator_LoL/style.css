@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "Lato-Black";
+    src: url(Assets/fonts/Lato-Black.ttf);
+}
+
+* {
+    background-color: #000913;
+    color: #fff;
+    font-family: 'Lato-Black';
+}

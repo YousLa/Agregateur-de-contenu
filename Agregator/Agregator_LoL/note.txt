@@ -5,7 +5,10 @@ Par champion (fr):
 https://ddragon.leagueoflegends.com/cdn/13.24.1/data/fr_FR/champion/Aatrox.json
 
 D'abord récuperé le nombre de skin dans l'objet skins et faire un for pour les afficher.
-Loading card (Aatrox_0, Aatrox_1, Aatrox_2,...):
+Skins (Aatrox_0, Aatrox_1, Aatrox_2,...):
+https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_20.jpg
+
+Loading Image : 
 https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg 
 
 /!\ ATTENTION /!\
