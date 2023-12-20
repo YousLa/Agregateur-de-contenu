@@ -1,0 +1,74 @@
+body {
+    max-width: 100%;
+    height: 100%;
+    background-color: #000000;
+}
+
+.card {
+    position: relative;
+    width: 250px;
+    height: 500px;
+    background: lightgrey;
+    box-shadow: #d11bff42 0 15px 40px -5px;
+    z-index: 1;
+    border-radius: 21px;
+    overflow: hidden;
+}
+
+.card__content {
+    background: linear-gradient(rgba(255, 255, 255, 0.473), rgba(150, 150, 150, 0.25));
+    z-index: 1;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 21px;
+}
+
+.card .blob {
+    position: absolute;
+    z-index: -1;
+    border-radius: 5em;
+    width: 220px;
+    height: 220px;
+}
+
+.card .blob:nth-child(2) {
+    left: -50px;
+    top: 0px;
+    background: #ff930f;
+}
+
+.card .blob:nth-child(3) {
+    left: 110px;
+    top: -30px;
+    z-index: -1;
+    background: #bf0fff;
+}
+
+.card .blob:nth-child(4) {
+    left: -60px;
+    top: 100px;
+    background: #ff1b6b;
+}
+
+.card .blob:nth-child(5) {
+    left: 100px;
+    top: 180px;
+    background: #0061ff;
+}
+
+.card .blob:nth-child(6) {
+    left: -90px;
+    top: 260px;
+    background: #000000;
+}
+
+.card .blob:nth-child(7) {
+    left: 120px;
+    top: 340px;
+    background: #d7fa0e;
+}
