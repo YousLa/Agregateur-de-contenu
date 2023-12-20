@@ -23,7 +23,7 @@ app.listen(8080, function () {
 // ^ Quand notre application reçoit une requête de type get sur la route (/)
 app.get('/', function (request, response) {
     // Fusion du ejs avec mes data
-    response.render('index.ejs', { nom: "Rudi" });
+    response.render('index.ejs', dataToDisplay);
 });
 
 // * RSS
@@ -34,6 +34,7 @@ dataToDisplay.feedGeekWire = new Object();
 dataToDisplay.feedGeekWire.item = [];
 dataToDisplay.apiWeather = new Object();
 dataToDisplay.apiWeather.temperatures = [];
+dataToDisplay.prof = { nom: "Rudi" };
 
 updateRSSGeekWire();
 updateWeather();
@@ -91,3 +92,5 @@ function updateWeather() {
         });
     }
 }
+
+console.log(dataToDisplay);

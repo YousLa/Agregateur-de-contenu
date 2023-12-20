@@ -9,9 +9,30 @@
 </head>
 
 <body>
-    <h1>
-        Hello <%= nom %>
+    <!-- Afficher la température de l'objet apiWeather -->
+    <h1>La température est de : <%= apiWeather.temperatures[9] %>
     </h1>
+
+    <!-- Afficher des éléments de l'objet feedGeekWire -->
+
+
+    <!-- Afficher le nom de l'objet prof -->
+    <h1>
+        <%= prof.nom %>
+    </h1>
+
+    <ul>
+        <% feedGeekWire.item.forEach(function(item) { %>
+            <li>
+                <span>Publié le : <%= item.pubDate %></span>
+                <h1>
+                    <a href='<%= item.link %>'>
+                        <%= item.title %>
+                    </a>
+                </h1>
+            </li>
+            <% }); %>
+    </ul>
 </body>
 
 </html>
