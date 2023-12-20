@@ -1,4 +1,4 @@
-// Simple serveur Web avec Express
+// Simple serveur Web avec Express 
 // ^ On fait appel à un module Express avec la fonction require
 const express = require('express');
 
