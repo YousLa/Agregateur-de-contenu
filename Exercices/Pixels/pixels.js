@@ -6,7 +6,8 @@
 let https = require('https');
 // Port HTTP 80, HTTPS 443
 let parseString = require('xml2js').parseString;
-// Cela devient objet de type parseString
+// Cela devient objet de type parseString => Transformer du XML en JSON
+// Il faut l'installer via le terminal => npm install xml12js
 
 // On crée une variable de type objet qui va contenir 3 propriétés : host, port, path
 let request = {
@@ -37,6 +38,7 @@ function receiveResponseCallback(response) {
         // On appelle une méthode dans laquelle on met en paramètres rawData et une fonction de callback 
         // Result => on obtient un objet JSON
         parseString(rawData, function (err, result) {
+            // RSS est l'élément racine qui nous donne accès aux éléments, transformé en propriété
             console.log(result.rss.channel[0].item[0].title[0]);
 
             // Ittération d'un tableau
@@ -50,4 +52,6 @@ function receiveResponseCallback(response) {
 };
 
 // rawData => On reçoie une chaîne de caractère structurée en JSON
+
+
 
