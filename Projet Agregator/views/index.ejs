@@ -21,9 +21,9 @@
     </div>
 
 
-    <!-- #region Nasa -->
+    <!-- #region JeuxVidéo.com -->
 
-    <div class="nasa">
+    <div class="JVC">
 
         <div class="card-container">
             <a href='<%= jeuxVideo.news[0].link %>' class="hero-image-container">
@@ -46,7 +46,6 @@
                     <div class="time-left">
                         <img src="https://i.postimg.cc/prpyV4mH/clock-selection-no-bg.png" alt="clock"
                             class="small-image" />
-                        <!-- TODO format date -->
                         <p>Publié le <%= jeuxVideo.news[0].date %>
                         </p>
                     </div>
@@ -97,15 +96,17 @@
 
     <!-- #endregion -->
 
+    <!-- #region GIF -->
+
     <div class="gif">
         <div class="gif-wrapper">
             <div class="gif-card madrid">
-                <img class="hero-image" src="https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg"
-                    alt="Spinning glass cube" />
+                <img class="hero-image" src="<%= giphy.item.data.images.original.url %>" alt="Spinning glass cube" />
             </div>
         </div>
     </div>
 
+    <!-- #endregion -->
 </body>
 
 </html>

@@ -30,13 +30,19 @@ app.get('/', function (request, response) {
 let dataToDisplay = new Object();
 // dataToDisplay.feedGeekWire = new Object();
 // dataToDisplay.feedGeekWire.item = [];
-// dataToDisplay.apiWeather = new Object();
-// dataToDisplay.apiWeather.temperatures = [];
+dataToDisplay.apiWeather = new Object();
+dataToDisplay.apiWeather.temperatures = [];
 // dataToDisplay.prof = { nom: "Rudi" };
 dataToDisplay.jeuxVideo = new Object();
 dataToDisplay.jeuxVideo.news = [];
+dataToDisplay.giphy = new Object();
+dataToDisplay.giphy.item = [];
 
+updateWeather();
+updateRSSJeuxVideo();
+updateGiphy();
 
+// #region JeuxVideo.com
 // * JeuxVidéo.com
 // Afficher Les News PC
 // item => category = News Jeu
@@ -54,7 +60,7 @@ function updateRSSJeuxVideo() {
 
     https.get(request, receiveResponseCallback);
     // 30 minutes
-    setTimeout(updateRSSGeekWire, 1000 * 60 * 30);
+    setTimeout(updateRSSJeuxVideo, 1000 * 60 * 30);
     // console.log("requête envoyée");
 
     function receiveResponseCallback(response) {
@@ -77,14 +83,13 @@ function updateRSSJeuxVideo() {
 
                 // Affichage de la date au format DD-MM-YY
                 let dateFormatee = `${jourFormat}/${moisFormat}/${annee}`;
-                console.log(dateFormatee);
+                // console.log(dateFormatee);
 
                 let item = {
                     "title": result.rss.channel[0].item[0].title[0],
                     "image": result.rss.channel[0].item[0].enclosure[0].$.url,
                     "link": result.rss.channel[0].item[0].link,
                     "description": result.rss.channel[0].item[0].description,
-                    // TODO Format date
                     "date": dateFormatee,
                     "createur": result.rss.channel[0].item[0]['dc:creator'][0]
                 }
@@ -94,42 +99,9 @@ function updateRSSJeuxVideo() {
         });
     }
 }
+// #endregion
 
-// * RSS
-
-updateRSSGeekWire();
-updateWeather();
-
-function updateRSSGeekWire() {
-    // Envoyer une requête de type GET à l'adresse :
-    // https://www.geekwire.com/feed/
-    // Pour obtenir une réponse XML
-    let request = {
-        "host": "www.geekwire.com",
-        "port": 443,
-        "path": "/feed/"
-    };
-    https.get(request, receiveResponseCallback);
-    setTimeout(updateRSSGeekWire, 10000);
-
-    function receiveResponseCallback(response) {
-        let rawData = "";
-        response.on('data', (chunk) => { rawData += chunk; });
-        response.on('end', function () {
-            parseString(rawData, function (err, result) {
-                for (let i = 0; i < result.rss.channel[0].item.length; i++) {  // itérer les items
-                    let item = {
-                        "title": result.rss.channel[0].item[i].title[0],
-                        "link": result.rss.channel[0].item[i].link[0],
-                        "pubDate": result.rss.channel[0].item[i].pubDate[0]
-                    }
-                    dataToDisplay.feedGeekWire.item.push(item);
-                }
-            });
-        });
-    }
-}
-
+// #region Weather
 function updateWeather() {
     // Envoyer une requête de type GET à l'adresse :
     // https://api.open-meteo.com/v1/forecast?latitude=50.85&longitude=4.37&hourly=temperature_2m
@@ -141,7 +113,8 @@ function updateWeather() {
     };
 
     https.get(request, receiveResponseCallback);
-    setTimeout(updateWeather, 5000);
+    // 5 minutes
+    setTimeout(updateWeather, 1000 * 60 * 5);
 
     function receiveResponseCallback(response) {
         let rawData = "";
@@ -150,8 +123,47 @@ function updateWeather() {
             // console.log(rawData); 
             let weather = JSON.parse(rawData);
             dataToDisplay.apiWeather.temperatures = weather.hourly.temperature_2m;
+            console.log(dataToDisplay.apiWeather.tempatures)
         });
     }
 }
+
+// #endregion
+
+// #region Giphy
+
+function updateGiphy() {
+    // Envoyer une requête de type GET à l'adresse :
+    // https://api.giphy.com/v1/gifs/random?api_key=....
+    // Pour obtenir une réponse JSON
+
+    // N'oubliez pas d'intaller : npm install dotenv
+    require('dotenv').config();
+
+    let path = "/v1/gifs/random?api_key=" + process.env.GIPHY_API_KEY
+    console.log(path);
+    let request = {
+        "host": "api.giphy.com",
+        "port": 443,
+        "path": path
+    };
+
+    https.get(request, receiveResponseCallback);
+    setTimeout(updateGiphy, 5000);
+
+    function receiveResponseCallback(response) {
+        console.log('Got response:' + response.statusCode);
+        let rawData = "";
+        response.on('data', (chunk) => { rawData += chunk; });
+        response.on('end', function () {
+            //console.log(rawData);
+            let giphy = JSON.parse(rawData);
+            dataToDisplay.giphy.item = giphy;
+            // console.log(dataToDisplay.giphy.item.data.embed_url);
+        });
+    }
+}
+
+// #endregion
 
 console.log(dataToDisplay);

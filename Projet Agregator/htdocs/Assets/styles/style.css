@@ -7,6 +7,7 @@ body {
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
 
 .meteo {
@@ -19,7 +20,7 @@ body {
     grid-row: 2/4;
 }
 
-.nasa {
+.JVC {
     grid-column: 1;
     grid-row: 1/3;
 }
@@ -64,7 +65,7 @@ body {
 }
 
 .weather-wrapper {
-    margin-top: 20px;
+    margin: 2em auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -72,7 +73,6 @@ body {
 }
 
 .weather-card {
-    margin: 20px 5px;
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -628,8 +628,7 @@ div.attribution {
 /* #endregion */
 
 .gif-wrapper {
-
-    margin-top: 20px;
+    margin: 2em auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
