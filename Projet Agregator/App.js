@@ -1,6 +1,8 @@
 let https = require('https');
 let http = require('http');
 let parseString = require('xml2js').parseString;
+// N'oubliez pas d'intaller : npm install dotenv
+require('dotenv').config();
 
 // Simple serveur Web avec Express 
 // ^ On fait appel à un module Express avec la fonction require
@@ -28,19 +30,19 @@ app.get('/', function (request, response) {
 
 // Création d'un objet dataToDsiplay qui contient toutes les données qui seront fusionnée avec le template
 let dataToDisplay = new Object();
-// dataToDisplay.feedGeekWire = new Object();
-// dataToDisplay.feedGeekWire.item = [];
-dataToDisplay.apiWeather = new Object();
-dataToDisplay.apiWeather.temperatures = [];
-// dataToDisplay.prof = { nom: "Rudi" };
+dataToDisplay.weather = new Object();
+dataToDisplay.weather.temperatures = [];
 dataToDisplay.jeuxVideo = new Object();
 dataToDisplay.jeuxVideo.news = [];
 dataToDisplay.giphy = new Object();
 dataToDisplay.giphy.item = [];
+dataToDisplay.lol = new Object();
+dataToDisplay.lol.champion = [];
 
-updateWeather();
 updateRSSJeuxVideo();
+updateWeather();
 updateGiphy();
+updateDataLol();
 
 // #region JeuxVideo.com
 // * JeuxVidéo.com
@@ -104,26 +106,32 @@ function updateRSSJeuxVideo() {
 // #region Weather
 function updateWeather() {
     // Envoyer une requête de type GET à l'adresse :
-    // https://api.open-meteo.com/v1/forecast?latitude=50.85&longitude=4.37&hourly=temperature_2m
+    // https://api.openweathermap.org/data/2.5/weather?lat=50.499527&lon=4.475402500000001&appid=...
     // Pour obtenir une réponse JSON
+
+    let path = "/data/2.5/weather?lat=50.499527&lon=4.475402500000001&appid=" + process.env.WEATHER_API_KEY;
+
     let request = {
-        "host": "api.open-meteo.com",
+        "host": "api.openweathermap.org",
         "port": 443,
-        "path": "/v1/forecast?latitude=50.85&longitude=4.37&hourly=temperature_2m"
+        "path": path
     };
+    // console.log(path);
 
     https.get(request, receiveResponseCallback);
     // 5 minutes
-    setTimeout(updateWeather, 1000 * 60 * 5);
+    setTimeout(updateWeather, 1000 * 60 * 60);
 
     function receiveResponseCallback(response) {
         let rawData = "";
         response.on('data', (chunk) => { rawData += chunk; });
         response.on('end', function () {
-            // console.log(rawData); 
+            console.log(rawData);
             let weather = JSON.parse(rawData);
-            dataToDisplay.apiWeather.temperatures = weather.hourly.temperature_2m;
-            console.log(dataToDisplay.apiWeather.tempatures)
+            dataToDisplay.weather.temperatures = weather;
+            dataToDisplay.weather.temperatures.celsius = parseInt((weather.main.temp) - 273.15);
+            dataToDisplay.weather.temperatures.icon = "http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png";
+            console.log(dataToDisplay.weather.temperatures.icon);
         });
     }
 }
@@ -137,11 +145,8 @@ function updateGiphy() {
     // https://api.giphy.com/v1/gifs/random?api_key=....
     // Pour obtenir une réponse JSON
 
-    // N'oubliez pas d'intaller : npm install dotenv
-    require('dotenv').config();
-
     let path = "/v1/gifs/random?api_key=" + process.env.GIPHY_API_KEY
-    console.log(path);
+    // console.log(path);
     let request = {
         "host": "api.giphy.com",
         "port": 443,
@@ -152,7 +157,7 @@ function updateGiphy() {
     setTimeout(updateGiphy, 5000);
 
     function receiveResponseCallback(response) {
-        console.log('Got response:' + response.statusCode);
+        // console.log('Got response:' + response.statusCode);
         let rawData = "";
         response.on('data', (chunk) => { rawData += chunk; });
         response.on('end', function () {
@@ -166,4 +171,46 @@ function updateGiphy() {
 
 // #endregion
 
-console.log(dataToDisplay);
+// #region lol
+
+function updateDataLol() {
+
+    // Envoyer une requête de type GET à l'adresse : 
+    // https://ddragon.leagueoflegends.com/cdn/13.23.1/data/en_US/champion.json
+    // Pour obtenir une réponse JSON
+
+    let request = {
+        // 1. Le nom de domaine
+        "host": "ddragon.leagueoflegends.com",
+        // 2. Le port du protocole
+        "port": 443,
+        // 3. Le chemin vers la ressource
+        "path": "/cdn/13.23.1/data/fr_FR/champion.json"
+    };
+
+    https.get(request, receiveResponseCallback);
+
+    function receiveResponseCallback(response) {
+        // console.log('Got response:' + response.statusCode);
+
+        let rawData = "";
+
+        response.on('data', (chunk) => { rawData += chunk; });
+
+        response.on('end', function (chunk) {
+            let champions = JSON.parse(rawData);
+            let championsData = champions.data;
+
+            for (const [key, value] of Object.entries(championsData)) {
+                // console.log(`${key}: ${value}`);
+            }
+
+
+            // console.log(champions);
+
+        });
+    };
+}
+
+// #endregion
+// console.log(dataToDisplay);

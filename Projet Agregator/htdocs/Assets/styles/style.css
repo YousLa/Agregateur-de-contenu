@@ -13,7 +13,6 @@ html {
 }
 
 body {
-
     margin: auto;
 }
 
@@ -106,8 +105,8 @@ body {
     width: 500px;
     height: 420px;
 
-    background-color: rgba(255, 255, 255, 0.199);
-    box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+    background-color: #14253d;
+    box-shadow: 0px 0px 25px 1px #14253d;
     -webkit-animation: appear 500ms ease-out forwards;
     animation: appear 500ms ease-out forwards;
 }
@@ -140,8 +139,8 @@ body {
 
 .weather-icon {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 5rem;
+    /* height: 150px; */
     top: 0;
     float: right;
     margin: 40px 40px 0 0;
@@ -566,6 +565,9 @@ Classes
     min-height: 860px;
     margin: 2em auto;
     background-color: var(--var-card-dark);
+    box-shadow: 0px 0px 25px 1px #14253d;
+    -webkit-animation: appear 500ms ease-out forwards;
+    animation: appear 500ms ease-out forwards;
     border-radius: 15px;
     margin-bottom: 1rem;
     padding: 2rem;

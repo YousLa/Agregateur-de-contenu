@@ -29,9 +29,13 @@
     <div class="meteo">
         <div class="weather-wrapper">
             <div class="weather-card madrid">
-                <div class="weather-icon sun"></div>
-                <h1>26º</h1>
-                <p>Madrid</p>
+                <!-- TODO lier les code d'icone aux images -->
+                <div class="weather-icon"><img class="weather-icon" src="<%= weather.temperatures.icon %>" alt=""></div>
+                <h1>
+                    <%= weather.temperatures.celsius %>
+                </h1>
+                <p>Belgique</p>
+
             </div>
         </div>
     </div>
