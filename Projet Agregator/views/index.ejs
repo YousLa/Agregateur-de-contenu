@@ -5,34 +5,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Assets/styles/style.css">
-    <title>Number One !</title>
+    <title>Document</title>
 </head>
 
-<body>
-    <!-- Afficher la température de l'objet apiWeather -->
-    <h1>La température est de : <%= apiWeather.temperatures[9] %>
-    </h1>
+<body class="grid">
 
-    <!-- Afficher des éléments de l'objet feedGeekWire -->
+    <div class="meteo">
+        <div class="weather-wrapper">
+            <div class="weather-card madrid">
+                <div class="weather-icon sun"></div>
+                <h1>26º</h1>
+                <p>Madrid</p>
+            </div>
+        </div>
+    </div>
 
 
-    <!-- Afficher le nom de l'objet prof -->
-    <h1>
-        <%= prof.nom %>
-    </h1>
+    <!-- #region Nasa -->
 
-    <ul>
-        <% feedGeekWire.item.forEach(function(item) { %>
-            <li>
-                <span>Publié le : <%= item.pubDate %></span>
-                <h1>
-                    <a href='<%= item.link %>'>
-                        <%= item.title %>
-                    </a>
-                </h1>
-            </li>
-            <% }); %>
-    </ul>
+    <div class="nasa">
+
+        <div class="card-container">
+            <a href='<%= jeuxVideo.news[0].link %>' class="hero-image-container">
+                <img class="hero-image" src="<%= jeuxVideo.news[0].image %>" alt="<%= jeuxVideo.news[0].title %>" />
+            </a>
+            <main class="main-content">
+
+                <p>
+                    <%= jeuxVideo.news[0].title %>
+                </p>
+                <p class="description">
+                    <%= jeuxVideo.news[0].description %>
+                </p>
+                <div class="flex-row">
+                    <div class="publish-by">
+                        <!-- <img src="https://i.postimg.cc/T1F1K0bW/Ethereum.png" alt="Ethereum" class="small-image" /> -->
+                        <p>Publié par <%= jeuxVideo.news[0].createur %>
+                        </p>
+                    </div>
+                    <div class="time-left">
+                        <img src="https://i.postimg.cc/prpyV4mH/clock-selection-no-bg.png" alt="clock"
+                            class="small-image" />
+                        <!-- TODO format date -->
+                        <p>Publié le <%= jeuxVideo.news[0].date %>
+                        </p>
+                    </div>
+                </div>
+            </main>
+            <div class="card-attribute">
+                <!-- <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar" /> -->
+                <p><span><a href="<%= jeuxVideo.news[0].link %>">En savoir plus.</a></span></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- #endregion -->
+
+    <!-- #region News -->
+
+    <div class="news">
+
+        <div class="card-container">
+            <a href="/" class="hero-image-container">
+                <img class="hero-image" src="https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg"
+                    alt="Spinning glass cube" />
+            </a>
+            <main class="main-content">
+                <h1><a href="#">TITRE</a></h1>
+                <p>Description</p>
+                <div class="flex-row">
+                    <div class="coin-base">
+                        <!-- <img src="https://i.postimg.cc/T1F1K0bW/Ethereum.png" alt="Ethereum" class="small-image" /> -->
+                        <h2>Publié par</h2>
+                    </div>
+                    <div class="time-left">
+                        <img src="https://i.postimg.cc/prpyV4mH/clock-selection-no-bg.png" alt="clock"
+                            class="small-image" />
+                        <p>Publié le</p>
+                    </div>
+                </div>
+            </main>
+            <div class="card-attribute">
+                <!-- <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar" /> -->
+                <p>Lien vers l'<span><a href="#">info</a></span>.</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- #endregion -->
+
+    <div class="gif">
+        <div class="gif-wrapper">
+            <div class="gif-card madrid">
+                <img class="hero-image" src="https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg"
+                    alt="Spinning glass cube" />
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

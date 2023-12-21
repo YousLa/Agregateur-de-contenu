@@ -1,5 +1,11 @@
-Liste API : 
+API Projet individuel : 
 
-- Spoonacular API
-- Pexels API
 - League of Legends
+- Marvel
+
+4 API Combinées :
+
+- GIPHY
+- NASA
+- Open meteo
+- jeuxvideo.com

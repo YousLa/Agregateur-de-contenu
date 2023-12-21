@@ -26,8 +26,6 @@ app.get('/', function (request, response) {
     response.render('index.ejs', dataToDisplay);
 });
 
-// * RSS
-
 // Création d'un objet dataToDsiplay qui contient toutes les données qui seront fusionnée avec le template
 let dataToDisplay = new Object();
 dataToDisplay.feedGeekWire = new Object();
@@ -35,6 +33,69 @@ dataToDisplay.feedGeekWire.item = [];
 dataToDisplay.apiWeather = new Object();
 dataToDisplay.apiWeather.temperatures = [];
 dataToDisplay.prof = { nom: "Rudi" };
+dataToDisplay.jeuxVideo = new Object();
+dataToDisplay.jeuxVideo.news = [];
+
+
+// * JeuxVidéo.com
+// Afficher Les News PC
+// item => category = News Jeu
+
+// Envoyer une requête de type GET à l'adresse :
+// https://www.jeuxvideo.com/rss/rss-switch.xml
+// Pour obtenir une réponse XML
+
+
+let request = {
+    "host": "www.jeuxvideo.com",
+    "port": 443,
+    "path": "/rss/rss-switch.xml"
+};
+
+https.get(request, receiveResponseCallback);
+
+// console.log("requête envoyée");
+
+function receiveResponseCallback(response) {
+    // console.log('Got response:' + response.statusCode);
+    let rawData = "";
+    response.on('data', (chunk) => { rawData += chunk; });
+    response.on('end', function () {
+        // console.log(rawData);
+
+        parseString(rawData, function (err, result) {
+            let date = new Date(result.rss.channel[0].item[0].pubDate);
+
+            // Extraction du jour, du mois et de l'année
+            let jour = date.getDate();
+            let mois = date.getMonth() + 1; // Les mois commencent à 0, donc on ajoute 1
+            let annee = date.getFullYear() % 100; // On prend les deux derniers chiffres de l'année
+
+            // Formatage avec ajout de zéros pour assurer deux chiffres pour le jour et le mois
+            let jourFormat = (jour < 10) ? `0${jour}` : jour;
+            let moisFormat = (mois < 10) ? `0${mois}` : mois;
+
+            // Affichage de la date au format DD-MM-YY
+            let dateFormatee = `${jourFormat}/${moisFormat}/${annee}`;
+            console.log(dateFormatee);
+
+            let item = {
+                "title": result.rss.channel[0].item[0].title[0],
+                "image": result.rss.channel[0].item[0].enclosure[0].$.url,
+                "link": result.rss.channel[0].item[0].link,
+                "description": result.rss.channel[0].item[0].description,
+                // TODO Format date
+                "date": dateFormatee,
+                "createur": result.rss.channel[0].item[0]['dc:creator'][0]
+            }
+
+            dataToDisplay.jeuxVideo.news.push(item);
+            console.log(dataToDisplay.jeuxVideo.news);
+        });
+    });
+}
+
+// * RSS
 
 updateRSSGeekWire();
 updateWeather();
