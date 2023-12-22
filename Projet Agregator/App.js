@@ -5,6 +5,8 @@ let parseString = require('xml2js').parseString;
 let md5 = require('md5');
 // N'oubliez pas d'intaller : npm install dotenv
 require('dotenv').config();
+// npm install request
+const request = require('request');
 
 // Simple serveur Web avec Express 
 // ^ On fait appel à un module Express avec la fonction require
@@ -40,12 +42,15 @@ dataToDisplay.giphy = new Object();
 dataToDisplay.giphy.item = [];
 dataToDisplay.lol = new Object();
 dataToDisplay.lol.news = [];
+dataToDisplay.horoscope = new Object();
+
 
 updateRSSJeuxVideo();
 updateWeather();
 updateGiphy();
 updateLol();
-updateMarvel()
+updateMarvel();
+updateHoroscope()
 
 // #region JeuxVideo.com
 // * JeuxVidéo.com
@@ -221,7 +226,7 @@ function updateLol() {
                     "date": dateFormate
                 }
                 dataToDisplay.lol.news.push(item);
-                console.log(dataToDisplay.lol.news[0].articles);
+                // console.log(dataToDisplay.lol.news[0].articles);
             });
         });
     }
@@ -257,6 +262,33 @@ function updateMarvel() {
         response.on('end', function () {
             // console.log(rawData);
         });
+    }
+}
+
+// #endregion
+
+// #region Horoscope
+function updateHoroscope() {
+    // Envoyer une requête de type GET à l'adresse :
+    // https://any.ge/horoscope/api/?sign=aquarius&type=daily&day=today&lang=en
+    // Pour obtenir une réponse JSON
+
+    const options = {
+        url: 'https://any.ge/horoscope/api/?sign=aquarius&type=daily&day=today&lang=en',
+        headers: {
+            'Accept': 'application/json'
+        }
+    };
+
+    request(options, callback);
+
+    function callback(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            const horoscope = JSON.parse(body);
+            dataToDisplay.horoscope.sign = horoscope[0].sign;
+            dataToDisplay.horoscope.date = horoscope[0].date;
+            dataToDisplay.horoscope.text = horoscope[0].text.replace(/<[^>]*>/g, '');  // retirer les balises avec .replace(/<[^>]*>/g, '')
+        }
     }
 }
 

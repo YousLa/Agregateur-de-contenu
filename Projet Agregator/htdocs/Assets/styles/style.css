@@ -100,7 +100,8 @@ body {
     justify-content: center;
 }
 
-.weather-card {
+.weather-card,
+.horoscope-card {
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -576,7 +577,8 @@ Classes
     padding: 2rem;
 }
 
-.main-content p {
+.main-content p,
+.horoscope-card p {
     padding: 15px 0;
     min-height: 49px;
 }
@@ -635,9 +637,6 @@ a.hero-image-container {
     height: 400px;
     object-fit: cover;
 }
-
-
-
 
 .small-image {
     width: 1.2em;
@@ -717,6 +716,11 @@ div.attribution {
 
 .p {
     font-size: 1.2rem;
+}
+
+.plus {
+    padding: 0 !important;
+
 }
 
 .pp {

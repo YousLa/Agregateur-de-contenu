@@ -20,15 +20,23 @@
 
     <div class="horoscope">
         <div class="gif-wrapper">
-            <div class="weather-card madrid">
-
+            <div class="horoscope-card ">
+                <h2>
+                    <%= horoscope.sign %>
+                </h2>
+                <p>
+                    <%= horoscope.date %>
+                </p>
+                <p>
+                    <%= horoscope.text %>
+                </p>
             </div>
         </div>
     </div>
 
     <div class="meteo">
         <div class="weather-wrapper">
-            <div class="weather-card madrid">
+            <div class="weather-card">
                 <!-- TODO lier les code d'icone aux images -->
                 <div class="weather-icon"><img class="weather-icon" src="<%= weather.temperatures.icon %>" alt=""></div>
                 <h1>
@@ -165,7 +173,8 @@
 
 
                 <div class="card-attribute">
-                    <p><span><a href="<%= lol.news[0].articles.item[0].link[0] %>">En savoir plus.</a></span></p>
+                    <p class="plus"><span><a href="<%= lol.news[0].articles.item[0].link[0] %>">En savoir
+                                plus.</a></span></p>
                 </div>
             </div>
         </div>
