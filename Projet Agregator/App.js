@@ -280,6 +280,9 @@ function updateHoroscope() {
         }
     };
 
+    // 30 minutes
+    setTimeout(updateLol, 1000 * 60 * 30);
+
     request(options, callback);
 
     function callback(error, response, body) {
