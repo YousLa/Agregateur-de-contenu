@@ -40,7 +40,7 @@ body {
 
 
 
-.nasa {
+.horoscope {
     grid-column: 4;
     grid-row: 2;
 }
@@ -481,7 +481,7 @@ Variables
 
     /* Fonts */
 
-    --var-heading: normal normal 600 1.5em/1.6em 'Outfit', sans-serif;
+    --var-heading: normal normal 600 x-large/1.6em 'Outfit', sans-serif;
 
     --var-small-heading: normal normal 400 1em/1em 'Outfit', sans-serif;
 
@@ -578,6 +578,7 @@ Classes
 
 .main-content p {
     padding: 15px 0;
+    min-height: 49px;
 }
 
 .titre-jvc {
@@ -706,9 +707,24 @@ div.attribution {
     animation: appear 500ms ease-out forwards;
     top: -30px;
     left: 8px;
+    padding: 0 2rem 2rem 2rem;
 }
 
 .idk-wrapper {
     padding-bottom: 2rem;
 
+}
+
+.p {
+    font-size: 1.2rem;
+}
+
+.pp {
+    padding: 29px 0;
+}
+
+.stubborn {
+    padding: 0 0 1.2rem 0;
+    font: var(--var-small-heading);
+    color: var(--var-lightest);
 }

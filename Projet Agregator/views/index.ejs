@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="nasa">
+    <div class="horoscope">
         <div class="gif-wrapper">
             <div class="weather-card madrid">
 
@@ -91,23 +91,29 @@
                     alt="Spinning glass cube" />
             </a>
             <main class="main-content">
-                <h1><a href="#">TITRE</a></h1>
-                <p>Description</p>
+                <h1><a href="#">
+                        <%= %>
+                    </a></h1>
+                <p class="p">
+                    <%= %>
+                </p>
                 <div class="flex-row">
                     <div class="coin-base">
                         <!-- <img src="https://i.postimg.cc/T1F1K0bW/Ethereum.png" alt="Ethereum" class="small-image" /> -->
-                        <h2>Publié par</h2>
+                        <h2>Publié par
+                        </h2>
                     </div>
                     <div class="time-left">
                         <img src="https://i.postimg.cc/prpyV4mH/clock-selection-no-bg.png" alt="clock"
                             class="small-image" />
-                        <p>Publié le</p>
+                        <p>Publié le <%= %>
+                        </p>
                     </div>
                 </div>
             </main>
             <div class="card-attribute">
                 <!-- <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar" /> -->
-                <p>Lien vers l'<span><a href="#">info</a></span>.</p>
+                <p><span><a href="<%=  %>">En savoir plus.</a></span></p>
             </div>
         </div>
 
@@ -115,6 +121,8 @@
 
 
     <!-- #endregion -->
+
+    <!-- ! DONE -->
 
     <!-- #region GIF -->
 
@@ -128,13 +136,42 @@
 
     <!-- #endregion -->
 
+    <!-- ! DONE -->
+
+    <!-- #region Lol -->
     <div class="idk">
         <div class="idk-wrapper">
-            <div class="idk-card">
+            <div class="main-content idk-card">
+                <h2 class="titre-jvc pp">
+                    <%= lol.news[0].articles.item[0].title[0]%>
+                </h2>
+                <p class="p description">
+                    <%= lol.news[0].articles.item[0].description[0]%>
+                </p>
 
+                <div class="flex-row">
+                    <div class="publish-by">
+                        <!-- <img src="https://i.postimg.cc/T1F1K0bW/Ethereum.png" alt="Ethereum" class="small-image" /> -->
+                        <p>
+                        </p>
+                    </div>
+                    <div class="time-left">
+                        <img src="https://i.postimg.cc/prpyV4mH/clock-selection-no-bg.png" alt="clock"
+                            class="small-image" />
+                        <p class="pp">Publié le <%= lol.news[0].date%>
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="card-attribute">
+                    <p><span><a href="<%= lol.news[0].articles.item[0].link[0] %>">En savoir plus.</a></span></p>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- #endregion -->
 </body>
 
 </html>

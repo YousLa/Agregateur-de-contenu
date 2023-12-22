@@ -39,12 +39,12 @@ dataToDisplay.jeuxVideo.news = [];
 dataToDisplay.giphy = new Object();
 dataToDisplay.giphy.item = [];
 dataToDisplay.lol = new Object();
-dataToDisplay.lol.champion = [];
+dataToDisplay.lol.news = [];
 
 updateRSSJeuxVideo();
 updateWeather();
 updateGiphy();
-updateDataLol();
+updateLol();
 updateMarvel()
 
 // #region JeuxVideo.com
@@ -176,43 +176,55 @@ function updateGiphy() {
 
 // #region lol
 
-function updateDataLol() {
+function updateLol() {
 
     // Envoyer une requête de type GET à l'adresse : 
-    // https://ddragon.leagueoflegends.com/cdn/13.23.1/data/en_US/champion.json
-    // Pour obtenir une réponse JSON
+    // https://www.team-aaa.com/rss/game_lol.xml
+    // Pour obtenir une réponse XML
 
     let request = {
-        // 1. Le nom de domaine
-        "host": "ddragon.leagueoflegends.com",
-        // 2. Le port du protocole
+        "host": "www.team-aaa.com",
         "port": 443,
-        // 3. Le chemin vers la ressource
-        "path": "/cdn/13.23.1/data/fr_FR/champion.json"
+        "path": "/rss/game_lol.xml"
     };
 
     https.get(request, receiveResponseCallback);
+    // 30 minutes
+    setTimeout(updateLol, 1000 * 60 * 30);
+    // console.log("requête envoyée");
 
     function receiveResponseCallback(response) {
         // console.log('Got response:' + response.statusCode);
-
         let rawData = "";
-
         response.on('data', (chunk) => { rawData += chunk; });
+        response.on('end', function () {
+            // console.log(rawData);
+            parseString(rawData, function (err, result) {
 
-        response.on('end', function (chunk) {
-            let champions = JSON.parse(rawData);
-            let championsData = champions.data;
+                let date = new Date(result.rss.channel[0].item[0].pubDate);
 
-            for (const [key, value] of Object.entries(championsData)) {
-                // console.log(`${key}: ${value}`);
-            }
+                // Extraction du jour, du mois et de l'année
+                let jour = date.getDate();
+                let mois = date.getMonth() + 1; // Les mois commencent à 0, donc on ajoute 1
+                let annee = date.getFullYear() % 100; // On prend les deux derniers chiffres de l'année
 
+                // Formatage avec ajout de zéros pour assurer deux chiffres pour le jour et le mois
+                let jourFormat = (jour < 10) ? `0${jour}` : jour;
+                let moisFormat = (mois < 10) ? `0${mois}` : mois;
 
-            // console.log(champions);
+                // Affichage de la date au format DD-MM-YY
+                let dateFormate = `${jourFormat}/${moisFormat}/${annee}`;
+                // console.log(dateFormatee);
 
+                let item = {
+                    "articles": result.rss.channel[0],
+                    "date": dateFormate
+                }
+                dataToDisplay.lol.news.push(item);
+                console.log(dataToDisplay.lol.news[0].articles);
+            });
         });
-    };
+    }
 }
 
 // #endregion
@@ -227,7 +239,7 @@ function updateMarvel() {
     let ts = (new Date()).getTime();
     let hash = md5("" + ts + process.env.MARVEL_PRIVATE_KEY + process.env.MARVEL_PUBLIC_KEY);
     let path = "/v1/public/comics?ts=" + ts + "&apikey=" + process.env.MARVEL_PUBLIC_KEY + "&hash=" + hash;
-    console.log(path);
+    // console.log(path);
     let request = {
         "host": "gateway.marvel.com",
         "port": 443,
