@@ -1,6 +1,8 @@
 let https = require('https');
 let http = require('http');
 let parseString = require('xml2js').parseString;
+// npm install md5
+let md5 = require('md5');
 // N'oubliez pas d'intaller : npm install dotenv
 require('dotenv').config();
 
@@ -43,6 +45,7 @@ updateRSSJeuxVideo();
 updateWeather();
 updateGiphy();
 updateDataLol();
+updateMarvel()
 
 // #region JeuxVideo.com
 // * JeuxVidéo.com
@@ -126,12 +129,12 @@ function updateWeather() {
         let rawData = "";
         response.on('data', (chunk) => { rawData += chunk; });
         response.on('end', function () {
-            console.log(rawData);
+            // console.log(rawData);
             let weather = JSON.parse(rawData);
             dataToDisplay.weather.temperatures = weather;
             dataToDisplay.weather.temperatures.celsius = parseInt((weather.main.temp) - 273.15);
             dataToDisplay.weather.temperatures.icon = "http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png";
-            console.log(dataToDisplay.weather.temperatures.icon);
+            // console.log(dataToDisplay.weather.temperatures.icon);
         });
     }
 }
@@ -213,4 +216,38 @@ function updateDataLol() {
 }
 
 // #endregion
+
+// #region Marvel
+
+function updateMarvel() {
+    // Envoyer une requête de type GET à l'adresse :
+    // https://gateway.marvel.com/v1/public/characters?apikey=
+    // Pour obtenir une réponse JSON
+
+    let ts = (new Date()).getTime();
+    let hash = md5("" + ts + process.env.MARVEL_PRIVATE_KEY + process.env.MARVEL_PUBLIC_KEY);
+    let path = "/v1/public/comics?ts=" + ts + "&apikey=" + process.env.MARVEL_PUBLIC_KEY + "&hash=" + hash;
+    console.log(path);
+    let request = {
+        "host": "gateway.marvel.com",
+        "port": 443,
+        "path": path
+    };
+
+    https.get(request, receiveResponseCallback);
+
+    // console.log("requête envoyée");
+
+    function receiveResponseCallback(response) {
+        console.log('Got response:' + response.statusCode);
+        let rawData = "";
+        response.on('data', (chunk) => { rawData += chunk; });
+        response.on('end', function () {
+            // console.log(rawData);
+        });
+    }
+}
+
+// #endregion
+
 // console.log(dataToDisplay);
