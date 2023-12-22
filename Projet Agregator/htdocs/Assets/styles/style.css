@@ -18,39 +18,41 @@ body {
 
 .grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 2fr;
-    column-gap: 25px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+    /* /* column-gap: 25px; */
     row-gap: 20px;
 }
 
 .JVC {
-    grid-column: 1;
-    grid-row: 1/3;
+    grid-column: 1/3;
+    grid-row: 1/4;
 }
 
 .meteo {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
 }
 
 .gif {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 2;
 }
 
-.nasa {
-    grid-column: 3;
-    grid-row: 1;
-}
+
 
 .nasa {
-    grid-column: 3;
+    grid-column: 4;
     grid-row: 2;
 }
 
 .news {
-    grid-column: 4;
-    grid-row: 1/3;
+    grid-column: 5;
+    grid-row: 1/4;
+}
+
+.idk {
+    grid-column: 3/5;
+    grid-row: 3;
 }
 
 
@@ -102,8 +104,8 @@ body {
     border-radius: 20px;
     position: relative;
     overflow: hidden;
-    width: 500px;
-    height: 420px;
+    width: 300px;
+    height: 200px;
 
     background-color: #14253d;
     box-shadow: 0px 0px 25px 1px #14253d;
@@ -560,9 +562,10 @@ Classes
 
 .card-container {
     width: 100%;
-    max-width: 400px;
-    min-width: 400px;
+    max-width: 600px;
+    min-width: 600px;
     min-height: 860px;
+    max-height: 860px;
     margin: 2em auto;
     background-color: var(--var-card-dark);
     box-shadow: 0px 0px 25px 1px #14253d;
@@ -574,7 +577,12 @@ Classes
 }
 
 .main-content p {
-    margin: 10px 0;
+    padding: 15px 0;
+}
+
+.titre-jvc {
+    font-size: x-large;
+    padding: 20px 0 30px;
 }
 
 div.flex-row {
@@ -584,21 +592,24 @@ div.flex-row {
 }
 
 .description {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
 }
 
 div.publish-by,
-.time-left,
-.card-attribute {
+.time-left {
     display: flex;
     align-items: center;
-    padding: 2.5em 0 0 0;
+    padding: 1.5em 0 0 0;
     font-size: 0.8rem;
 }
 
 .card-attribute {
     padding-bottom: 1em;
     border-top: 2px solid var(--var-line-dark);
+    display: flex;
+    align-items: center;
+    padding: 2em 0 0 0;
+    font-size: 0.8rem;
 }
 
 a.hero-image-container {
@@ -678,7 +689,26 @@ div.attribution {
 }
 
 .gif-image {
-    height: 420px;
-    width: 500px;
-    object-fit: fill;
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.idk-card {
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    width: 625px;
+    height: 415px;
+    background-color: #14253d;
+    box-shadow: 0px 0px 25px 1px #14253d;
+    -webkit-animation: appear 500ms ease-out forwards;
+    animation: appear 500ms ease-out forwards;
+    top: -30px;
+    left: 8px;
+}
+
+.idk-wrapper {
+    padding-bottom: 2rem;
+
 }
