@@ -18,7 +18,7 @@ body {
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     /* /* column-gap: 25px; */
     row-gap: 20px;
 }
@@ -43,7 +43,7 @@ body {
     grid-row: 1;
 }
 
-.horoscope {
+.anime {
     grid-column: 4;
     grid-row: 2;
 }
@@ -115,7 +115,7 @@ body {
 }
 
 .weather-card,
-.horoscope-card {
+.anime-card {
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -591,8 +591,24 @@ Classes
     padding: 2rem;
 }
 
+.jvc-container {
+    width: 100%;
+    max-width: 650px;
+    min-width: 650px;
+    min-height: 860px;
+    max-height: 860px;
+    margin: 2em auto;
+    background-color: var(--var-card-dark);
+    box-shadow: 0px 0px 25px 1px #14253d;
+    -webkit-animation: appear 500ms ease-out forwards;
+    animation: appear 500ms ease-out forwards;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    padding: 2rem;
+}
+
 .main-content p,
-.horoscope-card p {
+.anime-card p {
     padding: 15px 0;
     min-height: 49px;
 }
@@ -654,13 +670,13 @@ a.hero-image-container {
 
 .movie-title {
     font: var(--var-small-heading);
-    font-size: xx-large;
+    font-size: x-large;
     padding: 0 0 1em 0;
     text-align: center;
 }
 
 .movie-image {
-    height: 550px;
+    height: 500px;
     width: 400px;
     object-fit: cover;
     margin: auto;
@@ -668,8 +684,7 @@ a.hero-image-container {
 
 .movie-container {
     width: 100%;
-    max-width: 600px;
-    min-width: 600px;
+    max-width: 450px;
     min-height: 860px;
     max-height: 860px;
     margin: 2em auto;

@@ -22,19 +22,20 @@
     </div>
     <!-- #endregion -->
 
-    <!-- #region horoscope -->
+    <!-- ! DONE -->
+    <!-- #region anime -->
 
-    <div class="horoscope">
+    <div class="anime">
         <div class="gif-wrapper">
-            <div class="horoscope-card ">
+            <div class="anime-card ">
                 <h2>
-                    <%= horoscope.sign %>
+                    <%= anime.anime %>
                 </h2>
                 <p>
-                    <%= horoscope.date %>
+                    <%= anime.character %>
                 </p>
                 <p>
-                    <%= horoscope.text %>
+                    <%= anime.quote %>
                 </p>
             </div>
         </div>
@@ -64,7 +65,7 @@
 
     <div class="JVC">
 
-        <div class="card-container">
+        <div class="jvc-container">
             <a href='<%= jeuxVideo.news[0].link %>' class="hero-image-container">
                 <img class="hero-image" src="<%= jeuxVideo.news[0].image %>" alt="<%= jeuxVideo.news[0].title %>" />
             </a>

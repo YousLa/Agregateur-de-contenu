@@ -46,6 +46,7 @@ dataToDisplay.horoscope = new Object();
 dataToDisplay.movie = new Object();
 dataToDisplay.movie.data = [];
 dataToDisplay.nasa = new Object();
+dataToDisplay.anime = new Object();
 
 
 updateRSSJeuxVideo();
@@ -55,7 +56,8 @@ updateLol();
 updateMarvel();
 updateHoroscope();
 updateMovie();
-updateNasa()
+updateNasa();
+updateAnime();
 
 // ! DONE
 // #region JeuxVideo.com
@@ -391,5 +393,43 @@ function updateNasa() {
 }
 
 // #endregion
+
+// ! DONE
+// #region Anime
+
+function updateAnime() {
+    // Envoyer une requête de type GET à l'adresse :
+    // https://animechan.xyz/api/random
+    // Pour obtenir une réponse JSON
+
+    // 5 minutes
+    setTimeout(updateAnime, 1000 * 60);
+
+    let request = {
+        "host": "animechan.xyz",
+        "port": 443,
+        "path": "/api/random"
+    };
+
+    https.get(request, receiveResponseCallback);
+
+    console.log("requête envoyée");
+
+    function receiveResponseCallback(response) {
+        console.log('Got response:' + response.statusCode);
+        let rawData = "";
+        response.on('data', (chunk) => { rawData += chunk; });
+        response.on('end', function () {
+            let anime = JSON.parse(rawData);
+            dataToDisplay.anime = anime;
+            console.log(dataToDisplay.anime);
+        });
+    }
+
+}
+
+
+// #endregion
+
 
 // console.log(dataToDisplay);
