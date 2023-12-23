@@ -45,7 +45,7 @@ body {
     grid-row: 2;
 }
 
-.news {
+.movie {
     grid-column: 5;
     grid-row: 1/4;
 }
@@ -602,7 +602,7 @@ div.publish-by,
 .time-left {
     display: flex;
     align-items: center;
-    padding: 1.5em 0 0 0;
+    padding: 0;
     font-size: 0.8rem;
 }
 
@@ -636,6 +636,36 @@ a.hero-image-container {
 .hero-image {
     height: 400px;
     object-fit: cover;
+}
+
+.movie-title {
+    font: var(--var-small-heading);
+    font-size: xx-large;
+    padding: 0 0 1em 0;
+    text-align: center;
+}
+
+.movie-image {
+    height: 550px;
+    width: 400px;
+    object-fit: cover;
+    margin: auto;
+}
+
+.movie-container {
+    width: 100%;
+    max-width: 600px;
+    min-width: 600px;
+    min-height: 860px;
+    max-height: 860px;
+    margin: 2em auto;
+    background-color: var(--var-card-dark);
+    box-shadow: 0px 0px 25px 1px #14253d;
+    -webkit-animation: appear 500ms ease-out forwards;
+    animation: appear 500ms ease-out forwards;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    padding: 2rem;
 }
 
 .small-image {

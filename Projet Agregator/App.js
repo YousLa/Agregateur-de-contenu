@@ -43,6 +43,8 @@ dataToDisplay.giphy.item = [];
 dataToDisplay.lol = new Object();
 dataToDisplay.lol.news = [];
 dataToDisplay.horoscope = new Object();
+dataToDisplay.movie = new Object();
+dataToDisplay.movie.data = [];
 
 
 updateRSSJeuxVideo();
@@ -50,8 +52,10 @@ updateWeather();
 updateGiphy();
 updateLol();
 updateMarvel();
-updateHoroscope()
+updateHoroscope();
+updateMovie();
 
+// ! DONE
 // #region JeuxVideo.com
 // * JeuxVidéo.com
 // Afficher Les News PC
@@ -111,6 +115,7 @@ function updateRSSJeuxVideo() {
 }
 // #endregion
 
+// ! DONE
 // #region Weather
 function updateWeather() {
     // Envoyer une requête de type GET à l'adresse :
@@ -146,6 +151,7 @@ function updateWeather() {
 
 // #endregion
 
+// ! DONE
 // #region Giphy
 
 function updateGiphy() {
@@ -179,6 +185,7 @@ function updateGiphy() {
 
 // #endregion
 
+// ! DONE
 // #region lol
 
 function updateLol() {
@@ -295,6 +302,56 @@ function updateHoroscope() {
     }
 }
 
+// #endregion
+
+// ! DONE
+// #region Movie
+
+function updateMovie() {
+    // Envoyer une requête de type GET à l'adresse :
+    // https://api.themoviedb.org/3/movie/upcoming?api_key=
+    // Pour obtenir une réponse JSON
+
+
+    // 30 minutes
+    setTimeout(updateLol, 1000 * 60 * 30);
+
+    let path = "/3/movie/popular?api_key=" + process.env.MOVIEDB_API_KEY + "&language=fr-FR";
+
+    let request = {
+        "host": "api.themoviedb.org",
+        "port": 443,
+        "path": path
+    };
+
+    https.get(request, receiveResponseCallback);
+
+    function receiveResponseCallback(response) {
+        let rawData = "";
+        response.on('data', (chunk) => { rawData += chunk; });
+        response.on('end', function () {
+            let movieDBApiData = JSON.parse(rawData);
+            dataToDisplay.movie.data = movieDBApiData.results;
+
+            // Format the release date
+            let rawDate = dataToDisplay.movie.data[0].release_date;
+            let formattedDate = formatReleaseDate(rawDate);
+            dataToDisplay.movie.data[0].release_date = formattedDate;
+
+            console.log(dataToDisplay.movie.data[0]);
+        });
+    }
+
+    // Function to format the release date
+    function formatReleaseDate(rawDate) {
+        let dateParts = rawDate.split("-");
+        let year = dateParts[0].substring(2);
+        let month = dateParts[1];
+        let day = dateParts[2];
+
+        return `${day}/${month}/${year}`;
+    }
+}
 // #endregion
 
 // console.log(dataToDisplay);

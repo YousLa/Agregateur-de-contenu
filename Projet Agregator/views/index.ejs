@@ -18,6 +18,8 @@
         </div>
     </div>
 
+    <!-- #region horoscope -->
+
     <div class="horoscope">
         <div class="gif-wrapper">
             <div class="horoscope-card ">
@@ -34,6 +36,9 @@
         </div>
     </div>
 
+    <!-- #endregion -->
+
+    <!-- #region Weather -->
     <div class="meteo">
         <div class="weather-wrapper">
             <div class="weather-card">
@@ -47,7 +52,7 @@
             </div>
         </div>
     </div>
-
+<!-- #endregion -->
 
     <!-- #region JeuxVidéo.com -->
 
@@ -91,37 +96,36 @@
 
     <!-- #region News -->
 
-    <div class="news">
+    <div class="movie">
 
-        <div class="card-container">
-            <a href="/" class="hero-image-container">
-                <img class="hero-image" src="https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg"
+        <div class="movie-container">
+            <h1 class="movie-title">
+                    <%= movie.data[0].title %>
+                </h1>
+            
+                <img class="movie-image" src="https://image.tmdb.org/t/p/original<%=movie.data[0].poster_path%>"
                     alt="Spinning glass cube" />
-            </a>
+            
             <main class="main-content">
-                <h1><a href="#">
-                        <%= %>
-                    </a></h1>
                 <p class="p">
-                    <%= %>
+                    <%= movie.data[0].overview%>
                 </p>
                 <div class="flex-row">
                     <div class="coin-base">
-                        <!-- <img src="https://i.postimg.cc/T1F1K0bW/Ethereum.png" alt="Ethereum" class="small-image" /> -->
-                        <h2>Publié par
+                        <h2>
                         </h2>
                     </div>
                     <div class="time-left">
                         <img src="https://i.postimg.cc/prpyV4mH/clock-selection-no-bg.png" alt="clock"
                             class="small-image" />
-                        <p>Publié le <%= %>
+                        <p>Date de sortie <%= movie.data[0].release_date %>
                         </p>
                     </div>
                 </div>
             </main>
             <div class="card-attribute">
                 <!-- <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar" /> -->
-                <p><span><a href="<%=  %>">En savoir plus.</a></span></p>
+                <p><span><a href="<%=  %>"></a></span></p>
             </div>
         </div>
 
