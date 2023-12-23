@@ -38,7 +38,10 @@ body {
     grid-row: 2;
 }
 
-
+.nasa {
+    grid-column: 4;
+    grid-row: 1;
+}
 
 .horoscope {
     grid-column: 4;
@@ -53,6 +56,17 @@ body {
 .idk {
     grid-column: 3/5;
     grid-row: 3;
+}
+
+.copyright {
+    position: absolute;
+    z-index: 1;
+    text-align: start;
+    vertical-align: bottom;
+    width: 275px;
+    top: 215px;
+    font-size: small;
+    color: #b8b8b8;
 }
 
 

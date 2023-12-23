@@ -45,6 +45,7 @@ dataToDisplay.lol.news = [];
 dataToDisplay.horoscope = new Object();
 dataToDisplay.movie = new Object();
 dataToDisplay.movie.data = [];
+dataToDisplay.nasa = new Object();
 
 
 updateRSSJeuxVideo();
@@ -54,12 +55,10 @@ updateLol();
 updateMarvel();
 updateHoroscope();
 updateMovie();
+updateNasa()
 
 // ! DONE
 // #region JeuxVideo.com
-// * JeuxVidéo.com
-// Afficher Les News PC
-// item => category = News Jeu
 
 function updateRSSJeuxVideo() {
     // Envoyer une requête de type GET à l'adresse :
@@ -338,7 +337,7 @@ function updateMovie() {
             let formattedDate = formatReleaseDate(rawDate);
             dataToDisplay.movie.data[0].release_date = formattedDate;
 
-            console.log(dataToDisplay.movie.data[0]);
+            // console.log(dataToDisplay.movie.data[0]);
         });
     }
 
@@ -352,6 +351,45 @@ function updateMovie() {
         return `${day}/${month}/${year}`;
     }
 }
+// #endregion
+
+// ! DONE
+// #region Nasa
+function updateNasa() {
+
+    // Envoyer une requête de type GET à l'adresse :
+    // https://api.nasa.gov/planetary/apod?api_key=...
+    // Pour obtenir une réponse JSON
+
+    // 24heures
+    setTimeout(updateLol, 1000 * 60 * 60 * 24);
+
+    let path = "/planetary/apod?api_key=" + process.env.NASA_API_KEY;
+    // console.log(path);
+
+    let request = {
+        "host": "api.nasa.gov",
+        "port": 443,
+        "path": path
+    };
+
+    https.get(request, receiveResponseCallback);
+
+    console.log("requête envoyée");
+
+    function receiveResponseCallback(response) {
+        console.log('Got response:' + response.statusCode);
+        let rawData = "";
+        response.on('data', (chunk) => { rawData += chunk; });
+        response.on('end', function () {
+            let nasa = JSON.parse(rawData);
+            dataToDisplay.nasa = nasa;
+            // console.log(dataToDisplay.nasa);
+        });
+    }
+
+}
+
 // #endregion
 
 // console.log(dataToDisplay);
