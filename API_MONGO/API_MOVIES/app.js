@@ -33,12 +33,16 @@ async function connectDB() {
                 _id: 0
             }
         }
+        // * Selection
+        const selection = {
+            Released_Year: 1957
+        };
 
         // ! On crée un tableau
-        const moviesArray = await imdbCollection.find({}, options).toArray();
+        const moviesArray = await imdbCollection.find(selection, options).toArray();
         // console.log(moviesArray[4]);
         for (let i = 0; i < moviesArray.length; i++) {
-            console.log(moviesArray[i]);
+            console.log(moviesArray[i].Series_Title);
         }
     }
     catch (error) {

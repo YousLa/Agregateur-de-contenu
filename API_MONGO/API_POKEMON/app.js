@@ -18,14 +18,18 @@ async function connectDB() {
         const options = {
             projection: {
                 name: 1,
-                classfication: 1
+                type1: 1
             }
         }
+        // * Selection
+        const selection = {
+            type1: "normal"
+        };
         // ! On crée un tableau
-        const pokemonArray = await pokemonCollection.find({}, options).toArray();
+        const pokemonArray = await pokemonCollection.find(selection, options).toArray();
         // console.log(pokemonArray[4]);
         for (let i = 0; i < pokemonArray.length; i++) {
-            console.log(pokemonArray[i]);
+            console.log(pokemonArray[i].name);
         }
     }
     catch (error) {
