@@ -8,10 +8,17 @@ async function connectDB() {
         const pokemonDatabase = mongoClient.db("pokemon");
         const pokemonCollection = pokemonDatabase.collection("pokemon");
         // const pokemonItem = await pokemonCollection.findOne();
-        const pokemonCursor = await pokemonCollection.findOne();
+        // ! Cursor super chiant
+        // const pokemonCursor = await pokemonCollection.find();
         // console.log(pokemonCursor);
-        for await (pokemon of pokemonCursor) {
-            console.log(pokemon);
+        // for await (pokemon of pokemonCursor) {
+        //     console.log(pokemon);
+        // }
+        // ! On crée un tableau
+        const pokemonArray = await pokemonCollection.find().toArray();
+        // console.log(pokemonArray[4]);
+        for (let i = 0; i < pokemonArray.length; i++) {
+            console.log(pokemonArray[i].name);
         }
     }
     catch (error) {

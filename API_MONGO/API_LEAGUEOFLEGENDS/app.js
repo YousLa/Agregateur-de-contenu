@@ -8,10 +8,17 @@ async function connectDB() {
         const leagueOfLegendsDatabase = mongoClient.db("leagueoflegends");
         const championsCollection = leagueOfLegendsDatabase.collection("champions");
         // const championsItem = await championsCollection.findOne();
-        const championsCursor = await championsCollection.find();
-        console.log(championsCursor);
-        for await (champions of championsCursor) {
-            console.log(champions);
+        // ! Cursor super chiant
+        // const championsCursor = await championsCollection.find();
+        // console.log(championsCursor);
+        // for await (champions of championsCursor) {
+        //     console.log(champions);
+        // }
+        // ! On crée un tableau
+        const leagueOfLegendsArray = await championsCollection.find().toArray();
+        // console.log(leagueOfLegendsArray);
+        for (let i = 0; i < leagueOfLegendsArray.length; i++) {
+            console.log(leagueOfLegendsArray[i].name);
         }
     }
     catch (error) {
