@@ -293,9 +293,9 @@ function updateHoroscope() {
 
     request(options, callback);
 
-    function callback(error, response, body) {
+    function callback(error, response, rawData) {
         if (!error && response.statusCode == 200) {
-            const horoscope = JSON.parse(body);
+            const horoscope = JSON.parse(rawData);
             dataToDisplay.horoscope.sign = horoscope[0].sign;
             dataToDisplay.horoscope.date = horoscope[0].date;
             dataToDisplay.horoscope.text = horoscope[0].text.replace(/<[^>]*>/g, '');  // retirer les balises avec .replace(/<[^>]*>/g, '')
