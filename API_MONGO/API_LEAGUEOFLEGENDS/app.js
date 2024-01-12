@@ -14,11 +14,19 @@ async function connectDB() {
         // for await (champions of championsCursor) {
         //     console.log(champions);
         // }
+
+        // * Projection
+        const options = {
+            projection: {
+                name: 1,
+                type: 1
+            }
+        }
         // ! On crée un tableau
-        const leagueOfLegendsArray = await championsCollection.find().toArray();
+        const leagueOfLegendsArray = await championsCollection.find({}, options).toArray();
         // console.log(leagueOfLegendsArray);
         for (let i = 0; i < leagueOfLegendsArray.length; i++) {
-            console.log(leagueOfLegendsArray[i].name);
+            console.log(leagueOfLegendsArray[i]);
         }
     }
     catch (error) {

@@ -25,11 +25,20 @@ async function connectDB() {
         // for await (movie of movieCursor) {
         //     console.log(movie);
         // }
+        // * Projection
+        const options = {
+            projection: {
+                Series_Title: 1,
+                Released_Year: 1,
+                _id: 0
+            }
+        }
+
         // ! On crée un tableau
-        const moviesArray = await imdbCollection.find().toArray();
+        const moviesArray = await imdbCollection.find({}, options).toArray();
         // console.log(moviesArray[4]);
         for (let i = 0; i < moviesArray.length; i++) {
-            console.log(moviesArray[i].Series_Title);
+            console.log(moviesArray[i]);
         }
     }
     catch (error) {
